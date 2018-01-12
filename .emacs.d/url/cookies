@@ -1,0 +1,18 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '(("sso.canvaslms.com"
+  [url-cookie "last_known_canvas_host" "umich.instructure.com" "Thu, 03 Jan 2019 19:52:10 -0000" "/" "sso.canvaslms.com" nil])
+ (".google.com"
+  [url-cookie "1P_JAR" "2018-01-03-20" "02-Feb-2018 20:33:19.00 GMT" "/" ".google.com" nil]
+  [url-cookie "NID" "120=vmvgcjTeRS5u9_quMYcy8I268bEzGAZ9FGwMj31XVh4LwwhHMxT9IBp0hY-g5TLuBeaEBpxOIxD6QE02og5PfqOPpFqZtxG2YXv6Ta4i2Y0ZK0m9NpsF5xESsandzufA" "05-Jul-2018 20:33:09.00 GMT" "/" ".google.com" nil]
+  [url-cookie "HttpOnly" nil "05-Jul-2018 20:33:09.00 GMT" "/" ".google.com" nil]))
+)
+(setq url-cookie-secure-storage
+ 'nil)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; End:

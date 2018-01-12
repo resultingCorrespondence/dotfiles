@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>config</title>
+<!-- 2017-12-24 Sun 19:16 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Hadley Gaines" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">config</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. unsorted</a></li>
+<li><a href="#sec-2">2. Theme Setup</a></li>
+<li><a href="#sec-3">3. Ivy</a></li>
+<li><a href="#sec-4">4. Linting</a></li>
+<li><a href="#sec-5">5. Org Mode <code>[0/1]</code></a>
+<ul>
+<li><a href="#sec-5-1">5.1. Use latest org mode</a></li>
+<li><a href="#sec-5-2">5.2. Org-bullets</a></li>
+<li><a href="#sec-5-3">5.3. Code Blocks</a>
+<ul>
+<li><a href="#sec-5-3-1">5.3.1. Don't spellcheck code blocks</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-4">5.4. <span class="todo TODO">TODO</span> Publishing</a>
+<ul>
+<li><a href="#sec-5-4-1">5.4.1. <span class="todo TODO">TODO</span> Export Location</a></li>
+</ul>
+</li>
+<li><a href="#sec-5-5">5.5. General config</a></li>
+<li><a href="#sec-5-6">5.6. Agenda view</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">6. Other packages</a>
+<ul>
+<li><a href="#sec-6-1">6.1. flyspell-ivy</a></li>
+<li><a href="#sec-6-2">6.2. evil-collection</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. Modeline</a></li>
+<li><a href="#sec-8">8. Key Bindings</a>
+<ul>
+<li><a href="#sec-8-1">8.1. Package</a></li>
+<li><a href="#sec-8-2">8.2. Leaders</a></li>
+<li><a href="#sec-8-3">8.3. Org Mode</a>
+<ul>
+<li><a href="#sec-8-3-1">8.3.1. Motion</a></li>
+<li><a href="#sec-8-3-2">8.3.2. Structure Editing</a></li>
+<li><a href="#sec-8-3-3">8.3.3. Other</a></li>
+<li><a href="#sec-8-3-4">8.3.4. Agenda mode</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-4">8.4. Ivy</a></li>
+</ul>
+</li>
+<li><a href="#sec-9">9. Other</a>
+<ul>
+<li><a href="#sec-9-1">9.1. Backups</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> unsorted</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+
+(setq package-enable-at-startup nil)
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
+
+(use-package benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
+(use-package evil
+  :ensure t
+  :config
+  (setq evil-normal-state-tag "NORMAL")
+  (setq evil-insert-state-tag "INSERT")
+  (setq evil-visual-state-tag "VISUAL")
+  (evil-mode 1))
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode)
+  (which-key-declare-prefixes-for-mode 'org-mode
+    "SPC c" "clock"
+    "SPC i" "ivy")
+  (global-set-key (kbd "C-?") 'which-key-show-major-mode)
+  )  
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+  )
+
+(setq org-src-fontify-natively t)
+
+
+(setq org-latex-compiler "xelatex")
+(setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
+(setq org-export-backends '(ascii html latex odt))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Theme Setup</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;download themes
+(use-package color-theme-solarized
+  :ensure t
+  :defer t)
+(use-package zenburn-theme
+  :ensure t
+  :defer t)
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :defer t)
+(use-package moe-theme
+  :ensure t
+  :defer t)
+(use-package gruvbox-theme
+  :ensure t
+  :defer t)
+(use-package ample-theme
+  :ensure t
+  :defer t)
+(use-package afternoon-theme
+  :ensure t
+  :defer t)
+(use-package clues-theme
+  :ensure t
+  :defer t)
+(use-package bubbleberry-theme
+  :ensure t
+  :defer t)
+(use-package badger-theme
+  :ensure t
+  :defer t)
+(use-package atom-one-dark-theme
+  :ensure t)
+
+
+ ;;color theme choice
+(load-theme 'atom-one-dark t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Ivy</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package counsel
+  :ensure t
+  :config
+  (use-package flx
+    :ensure t)
+  (ivy-mode 1)
+  (setq ivy-height 20)
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Linting</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package flycheck :ensure t
+  :config
+  (global-flycheck-mode)
+  )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Org Mode <code>[0/1]</code></h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Use latest org mode</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package org
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Org-bullets</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda ()
+			     (org-bullets-mode 1)
+			     (flyspell-mode))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Code Blocks</h3>
+<div class="outline-text-3" id="text-5-3">
+</div><div id="outline-container-sec-5-3-1" class="outline-4">
+<h4 id="sec-5-3-1"><span class="section-number-4">5.3.1</span> Don't spellcheck code blocks</h4>
+<div class="outline-text-4" id="text-5-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-to-list 'ispell-skip-region-alist '("^#+BEGIN_SRC" . "^#+END_SRC"))
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> <span class="todo TODO">TODO</span> Publishing</h3>
+<div class="outline-text-3" id="text-5-4">
+</div><div id="outline-container-sec-5-4-1" class="outline-4">
+<h4 id="sec-5-4-1"><span class="section-number-4">5.4.1</span> <span class="todo TODO">TODO</span> Export Location</h4>
+<div class="outline-text-4" id="text-5-4-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-publish-project-alist
+      '("all" :publishing-directory "~/Dropbox/org/Export")
+      )
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-5" class="outline-3">
+<h3 id="sec-5-5"><span class="section-number-3">5.5</span> General config</h3>
+<div class="outline-text-3" id="text-5-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq org-agenda-files '("~/Dropbox/org"))
+(setq org-M-RET-may-split-line 'nil)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-6" class="outline-3">
+<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Agenda view</h3>
+<div class="outline-text-3" id="text-5-6">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">;;(setq org-agenda-prefix-format "%c: %b")
+(setq org-agenda-skip-scheduled-if-done t
+      org-agenda-skip-deadline-if-done  t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Other packages</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> flyspell-ivy</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package flyspell-correct-ivy
+  :ensure t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> evil-collection</h3>
+<div class="outline-text-3" id="text-6-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package evil-collection
+  :ensure t
+  :custom (evil-collection-setup-minibuffer t)
+  :init (evil-collection-init))
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Modeline</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package spaceline
+ :ensure t
+ :config
+
+ (use-package spaceline-config
+   :ensure spaceline
+   :config
+   (spaceline-spacemacs-theme)
+   (spaceline-helm-mode)
+   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+   (setq powerline-default-separator 'slant)
+   (setq powerline-image-apple-rgb t)
+   (setq powerline-height 20)
+   (spaceline-toggle-buffer-size-off)
+   (spaceline-compile)
+   )
+ (use-package diminish :ensure t
+   :config
+   (diminish 'undo-tree-mode)
+   (diminish 'which-key-mode)
+   (diminish 'flyspell-mode)
+   (diminish 'ivy-mode)
+   (diminish 'flycheck-mode)
+))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Key Bindings</h2>
+<div class="outline-text-2" id="text-8">
+</div><div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> Package</h3>
+<div class="outline-text-3" id="text-8-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(use-package general :ensure t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Leaders</h3>
+<div class="outline-text-3" id="text-8-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq my-leader-1 "SPC")
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-3" class="outline-3">
+<h3 id="sec-8-3"><span class="section-number-3">8.3</span> Org Mode</h3>
+<div class="outline-text-3" id="text-8-3">
+</div><div id="outline-container-sec-8-3-1" class="outline-4">
+<h4 id="sec-8-3-1"><span class="section-number-4">8.3.1</span> Motion</h4>
+<div class="outline-text-4" id="text-8-3-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(general-define-key :states '(normal visual)
+		    :keymaps 'org-mode-map
+		    "{" 'outline-previous-visible-heading
+		    "}" 'outline-next-visible-heading
+		    "H" 'org-shiftleft
+		    "J" 'org-shiftdown
+		    "K" 'org-shiftup
+		    "L" 'org-shiftright)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-3-2" class="outline-4">
+<h4 id="sec-8-3-2"><span class="section-number-4">8.3.2</span> Structure Editing</h4>
+<div class="outline-text-4" id="text-8-3-2">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(general-define-key :states 'normal
+		    :keymaps 'org-mode-map
+		    :prefix my-leader-1
+		    "*" 'org-toggle-heading
+		    "^" 'org-sort)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-3-3" class="outline-4">
+<h4 id="sec-8-3-3"><span class="section-number-4">8.3.3</span> Other</h4>
+<div class="outline-text-4" id="text-8-3-3">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(general-define-key :states 'normal
+		    :keymaps 'org-mode-map
+		    :prefix my-leader-1
+		    "t" 'org-todo
+		    "c i" 'org-clock-in
+		    "c x" 'org-clock-in-last
+		    "c o" 'org-clock-out
+		    "c j" 'org-clock-goto
+		    "c q" 'org-clock-cancel
+		    "c d" 'org-clock-display
+		    "c r" 'org-clock-report
+		    "c z" 'org-resolve-clocks
+		    "c y" 'org-evaluate-time-range
+		    "c e" 'org-set-effort
+		    "c E" 'org-clock-modify-effort-estimate
+		    "e"   'org-export-dispatch
+		    "a t" 'org-todo-list
+		    "a a" 'org-agenda-list
+		    "d"   'org-deadline
+		    "s"   'org-schedule
+		    )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-3-4" class="outline-4">
+<h4 id="sec-8-3-4"><span class="section-number-4">8.3.4</span> Agenda mode</h4>
+<div class="outline-text-4" id="text-8-3-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(general-define-key :states 'emacs
+		    :keymaps 'org-agenda-mode-map
+		    "j" 'org-agenda-next-line
+		    "k" 'org-agenda-previous-line
+		    "p" 'org-agenda-capture
+		    "g" 'org-agenda-goto-date)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-4" class="outline-3">
+<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Ivy</h3>
+<div class="outline-text-3" id="text-8-4">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(general-define-key :states 'normal
+		    :prefix my-leader-1
+		    "i b" 'ivy-switch-buffer
+		    "i f" 'counsel-find-file
+		    "i s" 'flyspell-correct-previous-word-generic
+		    "i S" 'flyspell-correct-word-generic
+		    "i t" 'counsel-load-theme)
+
+(general-define-key :keymaps 'ivy-minibuffer-map
+		    "RET" 'ivy-alt-done)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Other</h2>
+<div class="outline-text-2" id="text-9">
+</div><div id="outline-container-sec-9-1" class="outline-3">
+<h3 id="sec-9-1"><span class="section-number-3">9.1</span> Backups</h3>
+<div class="outline-text-3" id="text-9-1">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.saves"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Hadley Gaines</p>
+<p class="date">Created: 2017-12-24 Sun 19:16</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
