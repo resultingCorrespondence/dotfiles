@@ -1,5 +1,6 @@
 * unsorted
 #+BEGIN_SRC emacs-lisp
+  (require 'package)
   (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
   (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
@@ -19,7 +20,8 @@
     :config
     ;; To disable collection of benchmark data after init is done.
     (add-hook 'after-init-hook 'benchmark-init/deactivate))
-
+  
+  (setq evil-want-integration nil)
   (use-package evil
     :ensure t
     :config
@@ -34,8 +36,7 @@
   (use-package linum-relative
     :ensure t
     :config
-    (linum-relative-mode)
-    )
+    (linum-relative-mode))
 
 
 
@@ -46,8 +47,7 @@
     (which-key-declare-prefixes-for-mode 'org-mode
       "SPC c" "clock"
       "C-SPC i" "ivy")
-    (global-set-key (kbd "C-?") 'which-key-show-major-mode)
-    )  
+    (global-set-key (kbd "C-?") 'which-key-show-major-mode))  
 
   (use-package general :ensure t)
 
@@ -110,10 +110,15 @@
     (use-package solarized-theme
       :ensure t
       :defer t)
+    (use-package zerodark-theme
+      :ensure t
+      :defer t)
+    (use-package doom-themes
+      :ensure t
+      :defer t)
 
      ;;color theme choice
     (load-theme 'sanityinc-tomorrow-eighties t)
-    (setq solarized-use-variable-pitch nil)
   #+END_SRC
 
 * Ivy
@@ -127,34 +132,40 @@
       (setq ivy-height 20)
       (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
   #+END_SRC
-* Lisp Development
-  #+BEGIN_SRC emacs-lisp
-    (use-package lispy
-      :ensure t
-      :config
-      (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-      (use-package lispyville
-	:ensure t
-	:config
-	(add-hook 'lispy-mode-hook #'lispyville-mode)))
-    (use-package rainbow-delimiters
-      :ensure t
-      :config
-      (add-hook 'lispy-mode-hook #'rainbow-delimiters-mode))
-  #+END_SRC
+* Delimiters
+** rainbow-delimters
+   #+BEGIN_SRC emacs-lisp
+     (use-package rainbow-delimiters
+       :ensure t
+       :config
+       (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+   #+END_SRC
+** Smart-parens
+   #+BEGIN_SRC emacs-lisp
+     (use-package smartparens
+       :ensure t
+       :config
+       (require 'smartparens-config)
+       (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
+       (use-package evil-smartparens
+	 :ensure t
+	 :config
+	 (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)))
+   #+END_SRC
 * Linting
   #+BEGIN_SRC emacs-lisp
   (use-package flycheck :ensure t
     :config
-    (global-flycheck-mode)
-    )
+    (global-flycheck-mode))
   #+END_SRC
 * Autocompletion
   #+BEGIN_SRC emacs-lisp
     (use-package company
       :ensure t
       :config
-      (add-hook 'emacs-lisp-mode-hook lambda () (company-mode 1)))
+      (add-hook 'emacs-lisp-mode-hook
+		(lambda ()
+		  (setq company-mode 1))))
   #+END_SRC
 * Org Mode [0/1] 
 ** Use latest org mode
@@ -235,7 +246,8 @@
      (use-package evil-collection
        :ensure t
        :custom (evil-collection-setup-minibuffer t)
-       :init (evil-collection-init))
+       :init
+       (evil-collection-init))
    #+END_SRC
 * Calendar
 ** Setup
@@ -503,12 +515,27 @@
        (diminish 'overwrite-mode)
     ))
   #+END_SRC
+* Latex
+  #+BEGIN_SRC emacs-lisp
+    (use-package tex
+      :defer t
+      :ensure auctex
+      :config
+      (setq TeX-auto-save t)
+      (setq TeX-parse-self t))
+  #+END_SRC
+* Yasnippet
+** General
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+       :ensure t)
+   #+END_SRC
 * Key Bindings
-** Package
 ** Leaders
    #+BEGIN_SRC emacs-lisp
-     (setq major-mode-leader "SPC")
+     (general-def :states '(normal motion emacs) "SPC" nil)
      (setq general-leader "SPC SPC")
+     (setq major-mode-leader "SPC")
    #+END_SRC
 ** Org Mode
 *** Motion
@@ -583,16 +610,14 @@
 			 :prefix general-leader
 			 "m" 'mu4e)
    #+END_SRC
-* Yasnippet
-** General
-   #+BEGIN_SRC emacs-lisp
-     (use-package yasnippet
-       :ensure t)
-   #+END_SRC
 * PDF-Tools
   #+BEGIN_SRC emacs-lisp
     (use-package pdf-tools
-      :ensure t)
+      :ensure t
+      :config
+      (setq pdf-view-use-unicode-ligther nil)
+      (pdf-tools-install)
+      (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
   #+END_SRC
 * Start Screen
   #+BEGIN_SRC emacs-lisp

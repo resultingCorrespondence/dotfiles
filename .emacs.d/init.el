@@ -58,9 +58,22 @@
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+ '(org-agenda-custom-commands
+   (quote
+    (("d" "Today's Agenda"
+      ((tags "Big_Date+TIMESTAMP<=\"<+2w>\""
+	     ((org-agenda-overriding-header "Upcoming Big Dates:")
+	      (org-use-tag-inheritance nil)
+	      (org-agenda-prefix-format "%s")))
+       (agenda ""
+	       ((org-agenda-overriding-header "Todays Agenda:")
+		(org-agenda-span
+		 (quote day))
+		(org-agenda-use-time-grid nil))))
+      nil))))
  '(package-selected-packages
    (quote
-    (companye company company-mode rainbow-delimiters org-pdfview pdf-tools dashboard lispyville lispy evil-easymotion tt solarized-theme solarized-emacs yasnippet org-mu4e tao-theme message mu4e-alert org-drill-table linum-relative nlinum-relative notmuch evil-mu4e mu4e org-gcal calfw-ical calfw org org-grep evil-collection flyspell-correct-ivy flx counsel ivy diminish general Smart-mode-line spacemacs-theme atom-one-dark-theme atom-one-dark material-theme badger-theme bubbleberry-theme clues-theme afternoon-theme ample-theme gruvbox-theme moe-theme color-theme-sanityinc-tomorrow color-theme-zenburn spaceline spaceline-config helm-config exec-path-from-shell ox-latex which-key org-bullets color-theme-solarized evil use-package)))
+    (doom-themes zerodark-theme evil-smartparens smartparens auctex companye company company-mode rainbow-delimiters org-pdfview pdf-tools dashboard lispyville lispy evil-easymotion tt solarized-theme solarized-emacs yasnippet org-mu4e tao-theme message mu4e-alert org-drill-table linum-relative nlinum-relative notmuch evil-mu4e mu4e org-gcal calfw-ical calfw org org-grep evil-collection flyspell-correct-ivy flx counsel ivy diminish general Smart-mode-line spacemacs-theme atom-one-dark-theme atom-one-dark material-theme badger-theme bubbleberry-theme clues-theme afternoon-theme ample-theme gruvbox-theme moe-theme color-theme-sanityinc-tomorrow color-theme-zenburn spaceline spaceline-config helm-config exec-path-from-shell ox-latex which-key org-bullets color-theme-solarized evil use-package)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")

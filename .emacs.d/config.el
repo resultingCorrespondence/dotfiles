@@ -1,3 +1,4 @@
+(require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
@@ -18,6 +19,7 @@
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
+(setq evil-want-integration nil)
 (use-package evil
   :ensure t
   :config
@@ -32,8 +34,7 @@
 (use-package linum-relative
   :ensure t
   :config
-  (linum-relative-mode)
-  )
+  (linum-relative-mode))
 
 
 
@@ -44,8 +45,7 @@
   (which-key-declare-prefixes-for-mode 'org-mode
     "SPC c" "clock"
     "C-SPC i" "ivy")
-  (global-set-key (kbd "C-?") 'which-key-show-major-mode)
-  )  
+  (global-set-key (kbd "C-?") 'which-key-show-major-mode))  
 
 (use-package general :ensure t)
 
@@ -103,10 +103,15 @@
 (use-package solarized-theme
   :ensure t
   :defer t)
+(use-package zerodark-theme
+  :ensure t
+  :defer t)
+(use-package doom-themes
+  :ensure t
+  :defer t)
 
  ;;color theme choice
 (load-theme 'sanityinc-tomorrow-eighties t)
-(setq solarized-use-variable-pitch nil)
 
 (use-package counsel
   :ensure t
@@ -117,19 +122,31 @@
   (setq ivy-height 20)
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
 
-(use-package lispy
+(use-package rainbow-delimiters
   :ensure t
   :config
-  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-  (use-package lispyville
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+
+(use-package smartparens
+  :ensure t
+  :config
+  (require 'smartparens-config)
+  (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
+  (use-package evil-smartparens
     :ensure t
     :config
-    (add-hook 'lispy-mode-hook #'lispyville-mode)))
+    (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)))
 
 (use-package flycheck :ensure t
   :config
-  (global-flycheck-mode)
-  )
+  (global-flycheck-mode))
+
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook
+	    (lambda ()
+	      (setq company-mode 1))))
 
 (use-package org
   :ensure t)
@@ -182,7 +199,8 @@
 (use-package evil-collection
   :ensure t
   :custom (evil-collection-setup-minibuffer t)
-  :init (evil-collection-init))
+  :init
+  (evil-collection-init))
 
 (use-package calfw
   :ensure t
@@ -426,8 +444,19 @@
    (diminish 'overwrite-mode)
 ))
 
-(setq major-mode-leader "SPC")
+(use-package tex
+  :defer t
+  :ensure auctex
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t))
+
+(use-package yasnippet
+  :ensure t)
+
+(general-def :states '(normal motion emacs) "SPC" nil)
 (setq general-leader "SPC SPC")
+(setq major-mode-leader "SPC")
 
 (general-define-key :states '(normal visual)
                     :keymaps 'org-mode-map
@@ -487,11 +516,12 @@
 		    :prefix general-leader
 		    "m" 'mu4e)
 
-(use-package yasnippet
-  :ensure t)
-
 (use-package pdf-tools
-  :ensure t)
+  :ensure t
+  :config
+  (setq pdf-view-use-unicode-ligther nil)
+  (pdf-tools-install)
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
 (use-package dashboard
   :ensure t
