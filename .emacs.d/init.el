@@ -24,6 +24,7 @@
  '(evil-collection-setup-minibuffer t)
  '(fci-rule-color "#383838")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
+ '(frame-background-mode (quote dark))
  '(fringe-mode 10 nil (fringe))
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
@@ -73,7 +74,7 @@
       nil))))
  '(package-selected-packages
    (quote
-    (doom-themes zerodark-theme evil-smartparens smartparens auctex companye company company-mode rainbow-delimiters org-pdfview pdf-tools dashboard lispyville lispy evil-easymotion tt solarized-theme solarized-emacs yasnippet org-mu4e tao-theme message mu4e-alert org-drill-table linum-relative nlinum-relative notmuch evil-mu4e mu4e org-gcal calfw-ical calfw org org-grep evil-collection flyspell-correct-ivy flx counsel ivy diminish general Smart-mode-line spacemacs-theme atom-one-dark-theme atom-one-dark material-theme badger-theme bubbleberry-theme clues-theme afternoon-theme ample-theme gruvbox-theme moe-theme color-theme-sanityinc-tomorrow color-theme-zenburn spaceline spaceline-config helm-config exec-path-from-shell ox-latex which-key org-bullets color-theme-solarized evil use-package)))
+    (org-pomodoro planet-theme arjen-grey-theme nordless-theme zeno-theme nord-theme flycheck doom-themes zerodark-theme evil-smartparens smartparens auctex companye company company-mode rainbow-delimiters org-pdfview pdf-tools dashboard lispyville lispy evil-easymotion tt solarized-theme solarized-emacs yasnippet org-mu4e tao-theme message mu4e-alert org-drill-table linum-relative nlinum-relative notmuch evil-mu4e mu4e org-gcal calfw-ical calfw org org-grep evil-collection flyspell-correct-ivy flx counsel ivy diminish general Smart-mode-line spacemacs-theme atom-one-dark-theme atom-one-dark material-theme badger-theme bubbleberry-theme clues-theme afternoon-theme ample-theme gruvbox-theme moe-theme color-theme-sanityinc-tomorrow color-theme-zenburn spaceline spaceline-config helm-config exec-path-from-shell ox-latex which-key org-bullets color-theme-solarized evil use-package)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -85,6 +86,14 @@
  '(sml/theme (quote dark))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
+ '(tetris-x-colors
+   [[229 192 123]
+    [97 175 239]
+    [209 154 102]
+    [224 108 117]
+    [152 195 121]
+    [198 120 221]
+    [86 182 194]])
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map

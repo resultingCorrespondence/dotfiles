@@ -18,7 +18,7 @@
   :config
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
-
+(setq evil-want-keybinding nil)
 (setq evil-want-integration nil)
 (use-package evil
   :ensure t
@@ -109,33 +109,75 @@
 (use-package doom-themes
   :ensure t
   :defer t)
+(use-package kaolin-themes
+  :ensure t
+  :defer t)
+(use-package nord-theme
+  :ensure t
+  :defer t)
+(use-package zeno-theme
+  :ensure t
+  :defer t)
+(use-package nordless-theme
+  :ensure t
+  :defer t)
+(use-package arjen-grey-theme
+  :ensure t
+  :defer t)
+(use-package planet-theme
+  :ensure t
+  :defer t)
+(use-package oceanic-theme
+  :ensure t
+  :defer t)
 
- ;;color theme choice
-(load-theme 'sanityinc-tomorrow-eighties t)
+;;select and load theme
+(setq theme 'spacemacs-light)
+(load-theme theme t)
+
+
+;; customize faces for selected theme
+(defun spacemacs-light-loaded ()
+  "Load the parameters for spacemacs-light."
+
+  ;;set the variables
+  (setq color-bg-white           "#fbf8ef"
+	color-bg-light           "#222425"
+	color-bg-dark            "#1c1e1f"
+	color-bg-darker          "#1c1c1c"
+	color-fg-white           "#ffffff"
+	color-shade-white        "#efeae9"
+	color-fg-light           "#655370"
+	color-dark-cyan          "#008b8b"
+	color-region-dark        "#2d2e2e"
+	color-region             "#39393d"
+	color-slate              "#8FA1B3"
+	color-keyword            "#f92672"
+	color-comment            "#525254"
+	color-builtin            "#fd971f"
+	color-purple             "#9c91e4"
+	color-doc                "#727280"
+	color-type               "#66d9ef"
+	color-string             "#b6e63e"
+	color-gray-dark          "#999"
+	color-gray               "#bbb"
+	sans-font          "Source Sans Pro"
+	serif-font         "Merriweather"
+	et-font            "EtBembo"
+	sans-mono-font     "Souce Code Pro"
+	serif-mono-font    "Verily Serif Mono")
+  )
+
+(if (equal theme 'spacemacs-light) (spacemacs-light-loaded))
 
 (use-package counsel
-  :ensure t
-  :config
-  (use-package flx
-    :ensure t)
-  (ivy-mode 1)
-  (setq ivy-height 20)
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
-
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
-
-(use-package smartparens
-  :ensure t
-  :config
-  (require 'smartparens-config)
-  (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
-  (use-package evil-smartparens
     :ensure t
     :config
-    (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)))
+    (use-package flx
+    :ensure t)
+    (ivy-mode 1)
+    (setq ivy-height 20)
+    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
 
 (use-package flycheck :ensure t
   :config
@@ -149,7 +191,87 @@
 	      (setq company-mode 1))))
 
 (use-package org
-  :ensure t)
+  :ensure t
+  :config
+  (if (equal theme 'spacemacs-light)
+      (progn
+	(set-face-attribute 'variable-pitch nil
+			    :family "EtBembo"
+			    :height 150
+			    :foreground color-bg-dark)
+	(set-face-attribute 'org-document-title nil
+			    :foreground color-bg-dark
+			    :height 1.5
+			    :weight 'bold)
+	(set-face-attribute 'org-done nil
+			    :strike-through t
+			    :foreground color-dark-cyan
+			    :background nil)
+	(org-indent-mode t)
+	(set-face-attribute 'org-indent nil
+			    :inherit '(org-hide fixed-pitch))
+	(set-face-attribute 'org-todo nil
+			    :foreground color-builtin
+			    :background nil)
+	(set-face-attribute 'org-level-1 nil
+			    :foreground color-bg-dark
+			    :height 1.3
+			    :weight 'bold)
+	(set-face-attribute 'org-level-2 nil
+			    :foreground color-bg-dark
+			    :height 1.2)
+	(set-face-attribute 'org-level-3 nil
+			    :foreground color-bg-dark
+			    :height 1.1)
+	(set-face-attribute 'org-level-4 nil
+			    :foreground color-bg-dark
+			    :height 1.0)
+	(set-face-attribute 'org-level-5 nil
+			    :foreground color-bg-dark
+			    :height 1.0)
+	(set-face-attribute 'org-level-6 nil
+			    :foreground color-bg-dark
+			    :height 1.0)
+	(set-face-attribute 'org-level-7 nil
+			    :foreground color-bg-dark
+			    :height 1.0)
+	(set-face-attribute 'org-level-8 nil
+			    :foreground color-bg-dark
+			    :height 1.0))))
+;  :custom-face
+;  (variable-pitch ((t (:family "EtBembo"
+;			       :height 130
+;			       :foreground "#1c1e1f"))))
+;  (org-document-title ((t (:foreground "#171717" :weight bold :height 1.5))))
+;  (org-done ((t (:background "#E8E8E8" :foreground "#0E0E0E" :strike-through t :weight bold))))
+;  (org-headline-done ((t (:foreground "#171717" :strike-through t))))
+;  (org-level-1 ((t (:foreground "#1c1e1f" :weight bold :height 1.3))))
+;  (org-level-2 ((t (:foreground "#1c1e1f" :weight bold :height 1.2))))
+;  (org-level-3 ((t (:foreground "#1c1e1f" :weight bold :height 1.1))))
+;  (org-level-4 ((t (:foreground "#1c1e1f" :weight bold :height 1.1))))
+;  (org-level-5 ((t (:foreground "#1c1e1f" :weight bold :height 1.1))))
+;  (org-level-6 ((t (:foreground "#1c1e1f" :weight bold :height 1.1))))
+;  (org-level-7 ((t (:foreground "#1c1e1f" :weight bold :height 1.1))))
+;  (org-level-8 ((t (:foreground "#1c1e1f" :weight bold :height 1.1))))
+;  (org-image-actual-width '(600)))
+
+(add-hook 'org-mode-hook
+	  '(lambda ()
+	     (setq line-spacing 0.2) ;; Add more line padding for readability
+	     (variable-pitch-mode 1) ;; All fonts with variable pitch.
+	     (org-indent-mode t)
+	     (mapc
+	      (lambda (face) ;; Other fonts with fixed-pitch.
+		(set-face-attribute face nil :inherit 'fixed-pitch))
+	      (list 'org-code
+		    'org-link
+		    'org-block
+		    'org-table
+		    'org-verbatim
+		    'org-block-begin-line
+		    'org-block-end-line
+		    'org-meta-line
+		    'org-document-info-keyword))))
 
 (use-package org-bullets
   :ensure t
@@ -173,10 +295,6 @@
 
 (setq org-agenda-files '("~/Dropbox/org" "~/Dropbox/org/Calendars"))
 
-(require 'cl)
-(require 'org-drill)
-(use-package org-drill-table :ensure t)
-
 (setq org-agenda-custom-commands
       '(("d" "Days Agenda View"
 	 ((tags "Big_Date+TIMESTAMP<=\"<+2w>\""
@@ -190,8 +308,13 @@
 
 (use-package org-pdfview
   :ensure t
+  :defer t
   :config
   (eval-after-load 'org '(require 'org-pdfview)))
+
+(use-package org-pomodoro
+  :ensure t
+  :defer t)
 
 (use-package flyspell-correct-ivy
   :ensure t)
@@ -201,220 +324,6 @@
   :custom (evil-collection-setup-minibuffer t)
   :init
   (evil-collection-init))
-
-(use-package calfw
-  :ensure t
-  :config
-  (use-package org-gcal
-    :ensure t
-    :config
-    (setq org-gcal-client-id "960315237881-r8j4ldivpl98il5ifoupdaskj51j65ib.apps.googleusercontent.com"
-      org-gcal-client-secret "Rb1t5gqNLOjyPQ2l9fy5i7LZ"
-      org-gcal-file-alist '(("hgaines95@gmail.com" .  "~/Dropbox/org/Calendars/(c)personal.org")
-			    ("vvflqc81oth9ul9m9tl43k77ks@group.calendar.google.com" . "~/Dropbox/org/Calendars/(c)school.org")
-			    ("9ekj1un8b2hbna9ej2j9uti3t0@group.calendar.google.com" . "~/Dropbox/org/Calendars/(c)work.org")
-			    ("pa2l114catrgjslafjd4re6v7k@group.calendar.google.com" . "~/Dropbox/org/Calendars/(c)YoungLife.org")))))
-(org-gcal-refresh-token)
-(org-gcal-sync)
-
-(add-to-list 'load-path "/usr/local/Cellar/mu/0.9.18_1/share/emacs/site-lisp/mu/mu4e")
-(use-package mu4e
-  :config
-  (setq mu4e-contexts
-	`( ,(make-mu4e-context
-	     :name "Personal"
-	     :match-func (lambda (msg) (when msg
-					 (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
-	     :vars '(
-		     (mu4e-sent-folder . "/Personal/[Gmail].Sent")
-		     (mu4e-trash-folder . "/Personal/[Gmail].Trash")
-		     (mu4e-drafts-folder . "/Personal/[Gmail].Drafts")
-		     (mu4e-reply-to-address . "hgaines95@gmail.com")
-		     (user-mail-address . "hgaines95@gmail.com")
-		     (user-full-name . "Hadley Gaines")
-
-		     ))
-	   ,(make-mu4e-context
-	     :name "School"
-	     :match-func (lambda (msg) (when msg
-					 (string-prefix-p "/School" (mu4e-message-field msg :maildir))))
-	     :vars '(
-		     (mu4e-sent-folder . "/School/[Gmail].Sent")
-		     (mu4e-trash-folder . "/School/[Gmail].Trash")
-		     (mu4e-drafts-folder . "/School/[Gmail].Drafts")
-		     (mu4e-reply-to-address . "hgaines@umich.edu")
-		     (user-mail-address . "hgaines@umich.edu")
-		     (user-full-name . "Hadley Gaines")
-		     ))))
-  (add-to-list 'mu4e-marks
-	       '(done
-		 :char       "d"
-		 :prompt     "done"
-		 :show-target (lambda (target) "Done")
-		 :action      (lambda (docid msg target)
-				(mu4e-action-retag-message msg "-\\Inbox"))))
-  (mu4e~headers-defun-mark-for done)
-  (mu4e~view-defun-mark-for done)
-  ;;(setq mu4e-html2text-command "html2text -utf8 -nobs -width 72")
-  (setq mu4e-html2text-command "w3m -T text/html")
-  (setq mu4e-show-images nil)
-  (setq mu4e-context-policy 'pick-first)
-  (setq mu4e-headers-include-related nil)
-  (setq mu4e-headers-results-limit 100)
-  (setq mu4e-get-mail-command "offlineimap -o")
-  :general
-  (:keymaps 'mu4e-headers-mode-map
-	    :states '(motion normal visual)
-	    "d" 'mu4e-headers-mark-for-done)
-  (:keymaps 'mu4e-view-mode-map
-	    "d" 'mu4e-view-mark-for-done))
-(use-package evil-mu4e
-  :ensure t)
-
-(defvar mu4e-action-tags-header "X-Keywords"
-  "Header where tags are stored. Used by `mu4e-action-retag-message'.
-   Make sure it is one of the headers mu recognizes for storing
-   tags: X-Keywords, X-Label, Keywords. Also note that changing
-   this setting on already tagged messages can lead to messages
-   with multiple tags headers.")
-
-(defvar mu4e-action-tags-completion-list '()
-  "List of tags to show for autocompletion in
-  `mu4e-action-retag-message'.")
-
-(defun mu4e~contains-line-matching (regexp path)
-  "Determine whether the file at path contains a line matching
-   the given regexp."
-  (with-temp-buffer
-    (insert-file-contents path)
-    (save-excursion
-      (goto-char (point-min))
-      (if (re-search-forward regexp nil t)
-	t
-	nil))))
-
-(defun mu4e~replace-first-line-matching (regexp to-string path)
-  "Replace the first line in the file at path that matches regexp
-   with the string replace."
-  (with-temp-file path
-    (insert-file-contents path)
-    (save-excursion
-      (goto-char (point-min))
-      (if (re-search-forward regexp nil t)
-	(replace-match to-string nil nil)))))
-
-(defun mu4e-action-retag-message (msg &optional retag-arg)
-  "Change tags of a message. Accepts a comma-separated list of
-   additions and removals.
-   Example: +tag,+long tag,-oldtag
-   would add 'tag' and 'long tag', and remove 'oldtag'."
-  (let* (
-	  (path (mu4e-message-field msg :path))
-	  (maildir (mu4e-message-field msg :maildir))
-	  (oldtags (mu4e-message-field msg :tags))
-	  (tags-completion
-	    (append
-	      mu4e-action-tags-completion-list
-	      (mapcar (lambda (tag) (format "+%s" tag))
-		mu4e-action-tags-completion-list)
-	      (mapcar (lambda (tag) (format "-%s" tag))
-		oldtags)))
-	  (retag (if retag-arg
-		   (split-string retag-arg ",")
-		   (completing-read-multiple "Tags: " tags-completion)))
-	  (header  mu4e-action-tags-header)
-	  (sep     (cond ((string= header "Keywords") ", ")
-		     ((string= header "X-Label") " ")
-		     ((string= header "X-Keywords") ", ")
-		     (t ", ")))
-	  (taglist (if oldtags (copy-sequence oldtags) '()))
-	  tagstr)
-    (dolist (tag retag taglist)
-      (cond
-	((string-match "^\\+\\(.+\\)" tag)
-	  (setq taglist (push (match-string 1 tag) taglist)))
-	((string-match "^\\-\\(.+\\)" tag)
-	  (setq taglist (delete (match-string 1 tag) taglist)))
-	(t
-	  (setq taglist (push tag taglist)))))
-
-    (setq taglist (sort (delete-dups taglist) 'string<))
-    (setq tagstr (mapconcat 'identity taglist sep))
-
-    (setq tagstr (replace-regexp-in-string "[\\&]" "\\\\\\&" tagstr))
-    (setq tagstr (replace-regexp-in-string "[/]"   "\\&" tagstr))
-
-    (if (not (mu4e~contains-line-matching (concat header ":.*") path))
-      ;; Add tags header just before the content
-      (mu4e~replace-first-line-matching
-	"^$" (concat header ": " tagstr "\n") path)
-
-      ;; replaces keywords, restricted to the header
-      (mu4e~replace-first-line-matching
-	(concat header ":.*")
-	(concat header ": " tagstr)
-	path))
-
-    (mu4e-message (concat "tagging: " (mapconcat 'identity taglist ", ")))
-    (mu4e-refresh-message path maildir)))
-
-(add-to-list 'mu4e-headers-actions '("retag message" . mu4e-action-retag-message) t)
-(add-to-list 'mu4e-view-actions '("retag message" . mu4e-action-retag-message) t)
-
-(setq mu4e-bookmarks '())
-(add-to-list 'mu4e-bookmarks
-	     (make-mu4e-bookmark
-	      :name  "Commercial"
-	      :query "tag:\\\\Inbox AND tag:Promotions"
-	      :key ?c))
-(add-to-list 'mu4e-bookmarks
-	     (make-mu4e-bookmark
-	      :name  "Primary"
-	      :query "tag:\\\\Inbox AND tag:Primary"
-	      :key ?p))
-(add-to-list 'mu4e-bookmarks
-	     (make-mu4e-bookmark
-	      :name  "Inbox"
-	      :query "tag:\\\\Inbox"
-	      :key ?i))
-
-(use-package mu4e-alert
-  :ensure t
-  :config
-  (setq mu4e-alert-interesting-mail-query
-      (concat
-       "tag:\\\\Inbox"
-       " AND tag:Primary"))
-  (mu4e-alert-set-default-style 'notifier)
-  (mu4e-alert-enable-notifications)
-  (defun gjstein-refresh-mu4e-alert-mode-line ()
-    (interactive)
-    (mu4e~proc-kill)
-    (mu4e-alert-enable-mode-line-display)
-    )
-  (run-with-timer 0 60 'gjstein-refresh-mu4e-alert-mode-line)
-  )
-
-(use-package smtpmail
-  :ensure t
-  :config
-  (setq message-send-mail-function 'smtpmail-send-it
-	smtpmail-starttls-credentials
-	'(("smtp.gmail.com" 587 nil nil))
-	smtpmail-default-smtp-server "smtp.gmail.com"
-	smtpmail-smtp-server "smtp.gmail.com"
-	smtpmail-smtp-service 587
-	smtpmail-debug-info t))
-
-(custom-set-variables '(message-kill-buffer-on-exit t))
-(setq message-citation-line-function 'message-insert-formatted-citation-line
-      message-cite-reply-position 'above
-      message-yank-prefix "    "
-      message-yank-cited-prefix "    "
-      message-yank-empty-prefix "    "
-      message-citation-line-format "On %e %B %Y %R, %f wrote:\n")
-
-(require 'org-mu4e)
 
 (use-package spaceline
  :ensure t
@@ -426,7 +335,7 @@
    (spaceline-spacemacs-theme)
    (spaceline-helm-mode)
    (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-   (setq powerline-default-separator 'arrow)
+   (setq powerline-default-separator 'slant)
    (setq powerline-image-apple-rgb t)
    (setq powerline-height 20)
    (spaceline-toggle-buffer-size-off)
@@ -443,16 +352,6 @@
    (diminish 'flycheck-mode)
    (diminish 'overwrite-mode)
 ))
-
-(use-package tex
-  :defer t
-  :ensure auctex
-  :config
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t))
-
-(use-package yasnippet
-  :ensure t)
 
 (general-def :states '(normal motion emacs) "SPC" nil)
 (setq general-leader "SPC SPC")
@@ -485,6 +384,7 @@
 		    "c d" 'org-clock-display
 		    "c r" 'org-clock-report
 		    "c z" 'org-resolve-clocks
+		    "c p" 'org-pomodoro
 		    "c y" 'org-evaluate-time-range
 		    "c e" 'org-set-effort
 		    "c E" 'org-clock-modify-effort-estimate
@@ -515,24 +415,6 @@
 (general-define-key :states '(normal motion)
 		    :prefix general-leader
 		    "m" 'mu4e)
-
-(use-package pdf-tools
-  :ensure t
-  :config
-  (setq pdf-view-use-unicode-ligther nil)
-  (pdf-tools-install)
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
-
-(use-package dashboard
-  :ensure t
-  :config
-  (use-package page-break-lines
-    :ensure t)
-  (dashboard-setup-startup-hook)
-  (turn-on-page-break-lines-mode)
-  (setq dashboard-items '((recents  . 10)
-			  (bookmarks . 5)
-			  (projects . 5))))
 
 (setq
    backup-by-copying t      ; don't clobber symlinks
